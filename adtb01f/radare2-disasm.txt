@@ -1,0 +1,88 @@
+chris$ r2 -A ENV.BIN
+[x] Analyze all flags starting with sym. and entry0 (aa)
+[x] Analyze function calls (aac)
+[x] find and analyze function preludes (aap)
+[x] Analyze len bytes of instructions for references (aar)
+[x] Check for objc references
+[x] Check for vtables
+[x] Type matching analysis for all functions (aaft)
+[x] Propagate noreturn information
+[x] Use -AA or aaaa to perform additional experimental analysis.
+ -- No such file or directory.
+[0x00000000]> pd
+            0x00000000      61             invalid
+        ┌─< 0x00000001      7469           je 0x6c
+        │   0x00000003      de626f         fisub word [rdx + 0x6f]
+        │   0x00000006      6f             outsd dx, dword [rsi]
+       ┌──< 0x00000007      7464           je 0x6d
+       ││   0x00000009      656c           insb byte [rdi], dx
+       ││   0x0000000b      61             invalid
+      ┌───< 0x0000000c      793d           jns 0x4b
+      │││   0x0000000e      3000           xor byte [rax], al
+      │││   0x00000010      626175647261.  vpsrad zmm17 {k4} , zmmword [rcx + 0x1d00], 0x65
+      │││   0x00000018      3d31313532     cmp eax, 0x32353131
+      │││   0x0000001d      3030           xor byte [rax], dh
+      │││   0x0000001f      007072         add byte [rax + 0x72], dh
+      │││   0x00000022      65             invalid
+      │││   0x00000023      62             invalid
+      │││   0x00000024      6f             outsd dx, dword [rsi]
+      │││   0x00000025      6f             outsd dx, dword [rsi]
+     ┌────< 0x00000026      743d           je 0x65
+     ││││   0x00000028      6563686f       movsxd rbp, dword gs:[rax + 0x6f]
+     ││││   ; DATA XREF from unk @
+     ││││   0x0000002c      3b6563         cmp esp, dword [rbp + 0x63]
+     ││││   0x0000002f      686f205479     push 0x7954206f             ; 'o Ty'
+    ┌─────< 0x00000034      7065           jo 0x9b
+    │││││   0x00000036      2022           and byte [rdx], ah
+    │││││   0x00000038      68656c7022     push 0x22706c65             ; 'elp"'
+    │││││   0x0000003d      20666f         and byte [rsi + 0x6f], ah
+   ┌──────< 0x00000040      7220           jb 0x62
+   ││││││   0x00000042      6d             insd dword [rdi], dx
+   ││││││   0x00000043      6f             outsd dx, dword [rsi]
+  ┌───────< 0x00000044      7265           jb 0xab
+  │││││││   0x00000046      20636f         and byte [rbx + 0x6f], ah
+  │││││││   ; DATA XREF from unk @
+  │││││││   0x00000049      6d             insd dword [rdi], dx
+  │││││││   0x0000004a      6d             insd dword [rdi], dx
+  │││││││   ; CODE XREF from unk @
+  ││││└───> 0x0000004b      61             invalid
+  ││││ ││   0x0000004c      6e             outsb dx, byte [rsi]
+  ││││┌───< 0x0000004d      64732e         jae 0x7e
+  │││││││   ; CALL XREF from unk @
+  │││││││   0x00000050      004d53         add byte [rbp + 0x53], cl
+  │││││││   0x00000053      5f             pop rdi
+  │││││││   ; CALL XREF from unk @
+  │││││││   0x00000054      424f4152       push r10
+  │││││││   0x00000058      443d42445f4d   cmp eax, 0x4d5f4442
+  │││││││   0x0000005e      53             push rbx
+  │││││││   0x0000005f      54             push rsp
+  │││││││   0x00000060      3137           xor dword [rdi], esi
+  │││││││   ; CODE XREF from unk @
+  │└──────> 0x00000062      33425f         xor eax, dword [rdx + 0x5f]
+  │ │││││   ; CODE XREF from unk @
+  │ │└────> 0x00000065      443031         xor byte [rcx], r14b
+  │ │ │││   0x00000068      41007374       add byte [r11 + 0x74], sil
+  │ │ │││   ; CODE XREF from unk @
+  │ │ ││└─> 0x0000006c      64696e3d7365.  imul ebp, dword fs:[rsi + 0x3d], 0x69726573
+  │ │ │     0x00000074      61             invalid
+  │ │ │     0x00000075      6c             insb byte [rdi], dx
+  │ │ │     0x00000076      007374         add byte [rbx + 0x74], dh
+  │ │ │     0x00000079      646f           outsd dx, dword fs:[rsi]
+  │ │ │ ┌─< 0x0000007b      7574           jne 0xf1
+  │ │ │ │   0x0000007d      3d73657269     cmp eax, 0x69726573
+  │ │   │   0x00000082      61             invalid
+  │ │   │   0x00000083      6c             insb byte [rdi], dx
+  │ │   │   0x00000084      007374         add byte [rbx + 0x74], dh
+  │ │  ┌──< 0x00000087      64657272       jb 0xfd
+  │ │  ││   0x0000008b      3d73657269     cmp eax, 0x69726573
+  │ │  ││   0x00000090      61             invalid
+  │ │  ││   0x00000091      6c             insb byte [rdi], dx
+  │ │  ││   0x00000092      006c6f67       add byte [rdi + rbp*2 + 0x67], ch
+  │ │  ││   0x00000096      6f             outsd dx, dword [rsi]
+  │ │  ││   0x00000097      5f             pop rdi
+  │ │  ││   0x00000098      636d64         movsxd rbp, dword [rbp + 0x64]
+  │ │  ││   ; XREFS: CODE 0x00000034  DATA 0x000041f6  DATA 0x00004256  DATA 0x00004296  DATA 0x00004936
+  │ │  ││   ; XREFS: DATA 0x000049b6  DATA 0x00005216  DATA 0x00005496  DATA 0x000054f6  DATA 0x000056b6
+  │ │  ││   ; XREFS: DATA 0x000059d6
+  │ └─────> 0x0000009b      3d626f6f74     cmp eax, 0x746f6f62
+[0x00000000]>
