@@ -6,7 +6,7 @@ The initial attempt to solder a lead to the RX pad failed, a fact I didn't fully
 
 `screen /dev/tty.usbserial-A50285BI 115200`
 
-While still in the terminal window, press and hold Enter. This results in root access. 
+While still in the terminal window, press and hold Enter. This results in access to the MBoot console. 
 
 ```
 BOOTSPILMLMLMLM76A6_OK!decomp
