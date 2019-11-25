@@ -6,7 +6,7 @@
 #     in=0x80B00000, in_size=0x28C385, out= 0x80000180, alloc_buf = 0x81000000
 #     in_size=2671493 out_size=7303092 unpack_size=0 
 # ### what we need is the hex representation of out_size, which is 0x6F6FB4
-# then use it to write the decompressed kernel to usb
+# ### then use it to write the decompressed kernel to usb
 # fatwrite usb 0 0x80000000 d2.bin 0x6F6FB4
 
 # -P flag does partial scan
