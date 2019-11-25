@@ -1,0 +1,101 @@
+# D2.BIN was created by running the following commands in u-boot:
+# spi_rdc 0x80B00000 0x7001C 0x28C385
+# LzmaDec 0x80B00000 0x28C385 0x80000180 0x81000000
+# ### above cmd decompresses the kernel into memory, giving this result:
+#     in=0x80B00000, in_size=0x28C385, out= 0x80000180, alloc_buf = 0x81000000
+#     in=0x80B00000, in_size=0x28C385, out= 0x80000180, alloc_buf = 0x81000000
+#     in_size=2671493 out_size=7303092 unpack_size=0 
+# ### what we need is the hex representation of out_size, which is 0x6F6FB4
+# then use it to write the decompressed kernel to usb
+# fatwrite usb 0 0x80000000 d2.bin 0x6F6FB4
+
+# -P flag does partial scan
+chris$ binwalk -P D2.BIN
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+384           0x180           eCos kernel exception handler, architecture: MIPSEL, exception vector table base address: 0x804F9D80
+1024          0x400           eCos kernel exception handler, architecture: MIPSEL, exception vector table base address: 0x804F9D80
+4201044       0x401A54        CRC32 polynomial table, little endian
+4212468       0x4046F4        Unix path: /dev/sda/1
+4748639       0x48755F        eCos RTOS string reference: "eCospro/packages/devs/eth/amd/pcnet/v2_0_60/src/if_pcnet.c"
+4748771       0x4875E3        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/smp.hxx"
+4748783       0x4875EF        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/smp.hxx"
+4748903       0x487667        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mempolt2.inl"
+4748915       0x487673        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mempolt2.inl"
+4749043       0x4876F3        eCos RTOS string reference: "eCospro/packages/services/memalloc/common/v2_0_60/src/malloc.cxx"
+4749143       0x487757        eCos RTOS string reference: "eCospro/packages/io/fileio/v2_0_60/src/misc.cxx"
+4749331       0x487813        eCos RTOS string reference: "eCospro/packages/fs/fat/v2_0_60/src/fatfs_supp.c"
+4750199       0x487B77        eCos RTOS string reference: "eCospro/packages/fs/fat/v2_0_60/src/fatfs_ncache.c"
+4750567       0x487CE7        eCos RTOS string reference: "eCospro/packages/fs/fat/v2_0_60/src/fatfs_blib.c"
+4751307       0x487FCB        eCos RTOS string reference: "eCospro/packages/io/disk/v2_0_60/src/disk.c"
+4753023       0x48867F        eCos RTOS string reference: "eCospro/packages/hal/common/v2_0_60/src/hal_misc.c"
+4753253       0x488765        eCos RTOS string reference: "eCos][CPU INFO] : CPU Clock = %d : RTC Period = %d"
+4753723       0x48893B        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/common/clock.cxx"
+4754075       0x488A9B        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/common/kapi.cxx"
+4754163       0x488AF3        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/thread.inl"
+4754175       0x488AFF        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/thread.inl"
+4754843       0x488D9B        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/common/thread.cxx"
+4755135       0x488EBF        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/common/except.cxx"
+4755359       0x488F9F        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/intr/intr.cxx"
+4756015       0x48922F        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/sched/mlqueue.cxx"
+4756607       0x48947F        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/sched/sched.cxx"
+4757307       0x48973B        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/sync/cnt_sem.cxx"
+4757523       0x489813        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/sync/flag.cxx"
+4757987       0x4899E3        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/mboxt2.inl"
+4757999       0x4899EF        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/kernel/mboxt2.inl"
+4758871       0x489D57        eCos RTOS string reference: "eCospro/packages/kernel/v2_0_60/src/sync/mutex.cxx"
+4759591       0x48A027        eCos RTOS string reference: "eCospro/packages/services/memalloc/common/v2_0_60/src/dlmalloc.cxx"
+4760347       0x48A31B        eCos RTOS string reference: "eCospro/packages/language/c/libc/setjmp/v2_0_60/src/longjmp.cxx"
+4760531       0x48A3D3        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/stream.inl"
+4760543       0x48A3DF        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/stream.inl"
+4760799       0x48A4DF        eCos RTOS string reference: "eCospro/packages/language/c/libc/stdio/v2_0_60/src/common/stream.cxx"
+4760903       0x48A547        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/streambuf.inl"
+4760915       0x48A553        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/streambuf.inl"
+4764131       0x48B1E3        eCos RTOS string reference: "eCospro/packages/io/fileio/v2_0_60/src/fd.cxx"
+4764271       0x48B26F        eCos RTOS string reference: "eCospro/packages/io/fileio/v2_0_60/src/file.cxx"
+4764703       0x48B41F        eCos RTOS string reference: "eCospro/packages/io/fileio/v2_0_60/src/dir.cxx"
+4764851       0x48B4B3        eCos RTOS string reference: "eCospro/packages/io/fileio/v2_0_60/src/select.cxx"
+4765195       0x48B60B        eCos RTOS string reference: "eCospro/packages/io/eth/v2_0_60/src/net/eth_drv.c"
+4765364       0x48B6B4        eCos RTOS string reference: "eCos_node"
+4765411       0x48B6E3        eCos RTOS string reference: "eCospro/packages/net/bsd_tcpip/v2_0_60/src/ecos/support.c"
+4765454       0x48B70E        eCos RTOS string reference: "ecos/support.c"
+4766727       0x48BC07        eCos RTOS string reference: "eCospro/packages/net/bsd_tcpip/v2_0_60/src/ecos/synch.c"
+4766770       0x48BC32        eCos RTOS string reference: "ecos/synch.c"
+4766871       0x48BC97        eCos RTOS string reference: "eCospro/packages/net/bsd_tcpip/v2_0_60/src/ecos/timeout.c"
+4766914       0x48BCC2        eCos RTOS string reference: "ecos/timeout.c"
+4770539       0x48CAEB        eCos RTOS string reference: "eCospro/packages/services/memalloc/common/v2_0_60/src/kapi.cxx"
+4770711       0x48CB97        eCos RTOS string reference: "eCospro/packages/language/c/libc/startup/v2_0_60/src/main.cxx"
+4770999       0x48CCB7        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/stdiofiles.inl"
+4771011       0x48CCC3        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/libc/stdio/stdiofiles.inl"
+4773207       0x48D557        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mfiximpl.inl"
+4773219       0x48D563        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mfiximpl.inl"
+4773983       0x48D85F        eCos RTOS string reference: "eCospro/LIB_eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mvarimpl.inl"
+4773995       0x48D86B        eCos RTOS string reference: "eCosNet_fileio_posix_fat_ntfs_net_c++_kappa_34kf_install/include/cyg/memalloc/mvarimpl.inl"
+4774867       0x48DBD3        eCos RTOS string reference: "eCospro/packages/language/c/libc/stdio/v2_0_60/src/common/setvbuf.cxx"
+4775011       0x48DC63        eCos RTOS string reference: "eCospro/packages/language/c/libc/startup/v2_0_60/src/_exit.cxx"
+4775151       0x48DCEF        eCos RTOS string reference: "eCospro/packages/language/c/libc/startup/v2_0_60/src/atexit.cxx"
+4775315       0x48DD93        eCos RTOS string reference: "eCospro/packages/fs/ntfs/v2_0_60/src/attrib.c"
+4776099       0x48E0A3        eCos RTOS string reference: "eCospro/packages/fs/ntfs/v2_0_60/src/ntfs_blib.c"
+4787936       0x490EE0        Unix path: /home/yf.wu/PERFORCE/THEALE/Uranus/Kappa_DDI_Branch/V2.0/utopia/project/kappa_ecos/../../mxlib/hal/kappa/audio/halAUDIO.c
+4788014       0x490F2E        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/audio/halAUDIO.c"
+4791656       0x491D68        Unix path: /home/stb/PERFORCE/THEALE/utopia/project/kappa_ecos/../../mxlib/hal/kappa/dac/halDAC.c
+4791703       0x491D97        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/dac/halDAC.c"
+4799368       0x493B88        Unix path: /home/talent.wang/talent.wang_theale_nb3174/THEALE/utopia/project/kappa_ecos/../../mxlib/hal/kappa/gop/halGOP.c
+4799440       0x493BD0        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/gop/halGOP.c"
+4823088       0x499830        Unix path: /home/sn001/K3/utopia/project/kappa_ecos/../../mxlib/hal/kappa/xc/mhal_hdmi.c
+4823124       0x499854        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/xc/mhal_hdmi.c"
+4823204       0x4998A4        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/xc/mhal_sc.c"
+4839372       0x49D7CC        Unix path: /home/stb/PERFORCE/THEALE/utopia/project/kappa_ecos/../../mxlib/hal/kappa/mvop/halMVOP.c
+4839419       0x49D7FB        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/mvop/halMVOP.c"
+4843640       0x49E878        Unix path: /home/sn001/K3/utopia/project/kappa_ecos/../../mxlib/hal/kappa/ve/mhal_tvencoder.c
+4843676       0x49E89C        eCos RTOS string reference: "ecos/../../mxlib/hal/kappa/ve/mhal_tvencoder.c"
+5063876       0x4D44C4        SHA256 hash constants, little endian
+5073672       0x4D6B08        CRC32 polynomial table, little endian
+5077768       0x4D7B08        CRC32 polynomial table, big endian
+5114155       0x4E092B        eCos RTOS string reference: "eCospro/packages/infra/v2_0_60/src/pure.cxx"
+5136919       0x4E6217        eCos RTOS string reference: "eCospro/packages/language/c/libc/i18n/v2_0_60/src/locale.cxx"
+5137491       0x4E6453        eCos RTOS string reference: "eCospro/packages/language/c/libc/stdio/v2_0_60/src/input/fgetc.cxx"
+5138563       0x4E6883        eCos RTOS string reference: "eCospro/packages/language/c/libc/time/v2_0_60/src/strftime.cxx"
+6607451       0x64D25B        Boot section Start 0x7040000 End 0x-FFF9
